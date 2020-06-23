@@ -13,7 +13,7 @@ literalNotation = {
     greetings: function(){
         console.log(`Hi ${literalNotation.name}!`);
     }
-};
+};//the literal notation is most used for that kind of object that's unic, that's necessary a lot of object in with those propeties and methods
 
 //Third
 sandalia = new Object();
@@ -64,5 +64,23 @@ var quayHotel = new Hotel('Quay', 40,['twin', 'double', 'suite', 'presidencial']
 console.log(quayHotel)
 console.log(quayHotel.checkAvailability())
 
-console.log(this.window)
 
+////////////////////////////////////////// F A C T O R Y  F U N C T I O N   ////////////////////////////////////////////////////
+
+//new way of writing a constructor function
+class Hoteis{
+    constructor(nome, quartos, tiposDeQuartos, quartosReservados){
+        this.nome = nome;  
+        this.quartos = quartos;
+        this.tiposDeQuartos = tiposDeQuartos;
+        this.quartosReservados = quartosReservados;
+    }
+
+    checarDisponibilidade(){
+        return this.quartos - this.quartosReservados
+    }
+}
+
+milEumaNoites = new Hoteis('Mil e uma noites', 80, ['Casal', 'Solteiro', 'Família', 'Bolo Doido'], 37);
+console.log(milEumaNoites)
+console.log(milEumaNoites.checarDisponibilidade())
