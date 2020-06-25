@@ -49,7 +49,7 @@ delete literalNotation.ninckNames;
 function Hotel(name, rooms, roomTypes, booked){
     //'this.' is used to link the values passed as arguments (when the function is called) to the properties of the object
     //so I'm creating a propertie that deserves to the method itself and will receive the value that's passed as argument
-    this.name = name;
+    this.name = 'balaranga';
     this.rooms = rooms;
     this.roomTypes= roomTypes;
     this.booked = booked;
@@ -58,6 +58,10 @@ function Hotel(name, rooms, roomTypes, booked){
         return this.rooms - this.booked;
     };   
 }
+
+
+
+
 //the key word "new", followed by the calling of the constructor function, creates the object by using the constructor function
 //the properties of this object 'Hotel' are passed as arguments to the function
 var quayHotel = new Hotel('Quay', 40,['twin', 'double', 'suite', 'presidencial'], 25);
