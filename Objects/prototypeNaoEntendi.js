@@ -1,4 +1,4 @@
-//https://pt.stackoverflow.com/questions/42962/o-que-%C3%A9-prot%C3%B3tipo-javascript
+                //https://pt.stackoverflow.com/questions/42962/o-que-%C3%A9-prot%C3%B3tipo-javascript
 //https://medium.com/trainingcenter/heran%C3%A7a-e-prot%C3%B3tipos-no-javascript-2c1e60e005a2
 
 // var x = Object.create(null); // O [[Prototype]] de x é nulo...
@@ -21,7 +21,7 @@ function ClasseDeY() {
 ClasseDeY.prototype = x; // Aqui estou instruindo o construtor a usar x como protótipo de
                          // todo objeto criado via "new ClasseDeY()"
 
-var y = new ClasseDeY(); // O campo especial [[Prototype]] de y agora contém referência pra x
+var y = new ClasseDeY(); // O campo especial [[Prototype]] de y agora contém referência pra \x
 
 console.log(y.c); // 10
 Object.getPrototypeOf(y) == x; // true
