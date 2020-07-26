@@ -4,7 +4,8 @@ perPage = 5
 const state = {
     page: 1,
     perPage,
-    totalPage: Math.ceil(data.length / perPage)//ceil arredonda pra cima
+    totalPage: Math.ceil(data.length / perPage), //ceil arredonda pra cima
+    maxVisibleButtons: 5
 }
 
 const html = {
@@ -27,16 +28,10 @@ const controls = {
         }
     },
     goTo(page) {
-        state.page = page;
-        //page maior do que o número total de páginas??
-        // if (page > state.totalPage){
-        //     state.page = state.totalPage;
-        // }
+       //precisa de tratamento
 
-        // //page menor do que o número total de páginas??
-        // if (page < 0){
-        //     state.page = 1;
-        // }
+        state.page = +page
+
     },
     createListeners(){
         html.get('.first').addEventListener('click', () => {
@@ -64,22 +59,84 @@ const controls = {
 
 const list = {
     create(item) {
-        
+        const div = document.createElement('div');
+        div.classList.add('item');
+        div.innerHTML = item;
+
+        html.get('.list').appendChild(div);
     },
 
     update() {
         html.get('.list').innerHTML = '';
-        this.create();
+        //pagina 1 = pagina 0
+        let page = state.page-1;
+        //pagina 0 vezes 5 é igual índice zero no array
+        start = page * state.perPage;
+        //0 mais cinco é igual a 4
+        end = start + state.perPage;
+        //paginatedItem = data[0, 1, 2, 3, 4]...
+        const paginatedItems = data.slice(start, end);
+
+        paginatedItems.forEach(list.create)
     }
 }
 
-// function update(){
-//     console.log(state.page)
-// }
+const buttons = {
+    element: html.get('.controls .numbers'),
+    create(page) {
+        const button = document.createElement('div');
+
+        button.innerHTML = page;
+
+        if(state.page == page){
+            button.classList.add('active');
+        }
+
+        button.addEventListener('click', (event)=>{
+            const page = event.target.innerText;
+            controls.goTo(page);
+            update();
+        })
+
+        buttons.element.appendChild(button);
+    },
+    update() {
+        buttons.element.innerHTML = "";
+        const { maxLeft, maxRight } = buttons.calculateMaxVisible();
+        console.log(maxLeft, maxRight)
+        for(let page = maxLeft; page <= maxRight; page++){
+            buttons.create(page)
+        }
+    },
+    calculateMaxVisible(){
+        const { maxVisibleButtons } = state
+        let maxLeft = (state.page - Math.floor(maxVisibleButtons/2));
+        let maxRight = (state.page + Math.floor(maxVisibleButtons/2))    
+        if (maxLeft < 1){
+            maxLeft = 1;
+            maxRight = maxVisibleButtons;
+        }
+        
+        if (maxRight > state.totalPage){
+            maxLeft = state.totalPage - (maxVisibleButtons - 1);
+            maxRight = state.totalPage;
+            if(maxLeft < 1){
+                maxLeft = 1;
+            }
+        }
+
+        return {maxLeft, maxRight}
+    }
+}
+
+function update(){
+    list.update();
+    buttons.update();
+}
 
 function init(){
-    list.update();
+    update();
     controls.createListeners();
 }
 
-list.update();
+init()
