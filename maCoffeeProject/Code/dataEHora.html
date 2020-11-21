@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        div.container{
+            width: 100vw;
+            height: 100vh;
+            background-color: black;
+            display: flex;
+            border: red 2px solid;
+            justify-content: center;
+            align-items: center;
+        }
+
+        div.container>div{
+            width: 80vw;
+            height: 60vh;
+            background-color: white;
+            border: blue 2px solid;
+            font-size: 2em;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="show">
+        </div>
+    </div>
+    <script>
+        show = document.getElementById("show");
+        setInterval(() => {
+            date = new Date().toLocaleDateString("pt-br", {
+                dateStyle: 'short'
+            });
+            weekday = new Date().toLocaleDateString("pt-br", {
+                weekday: 'short'
+            });
+            time = new Date().toLocaleTimeString("pt-br", {
+                timeStyle: 'medium',
+                hour12: false
+            });
+            show.innerHTML = date + "&#32;" + weekday.substr(0, 3) ;
+            show.innerHTML += "<br>" + time 
+
+        }, 1000);
+
+    </script>
+</body>
+</html>
