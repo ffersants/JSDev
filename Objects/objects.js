@@ -21,6 +21,14 @@ sandalia.cor = 'Preta';
 sandalia.tamanho = 39;
 sandalia['marca'] = 'Havaianas';
 
+//Fourth
+function createPerson(nome, sobrenome, idade){
+    return {nome, sobrenome, idade};
+}
+
+const fernando = createPerson("Fernando", "Ferreira", 20);
+
+
                                                 //2. Accessing an object:
 
 //a. Notação de ponto - It can access properties and methods of an object.
